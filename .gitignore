@@ -3,5 +3,5 @@
 /public/upload
 /public/backend
 /public/test/
-public/
 .env
+.idea
