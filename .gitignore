@@ -1,0 +1,7 @@
+/vendor
+/public/bower_components
+/public/upload
+/public/backend
+/public/test/
+public/
+.env
