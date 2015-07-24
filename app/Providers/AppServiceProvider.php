@@ -57,5 +57,11 @@ class AppServiceProvider extends ServiceProvider
             'App\Domain\Models\Tag\TagRepository',
             'App\Infrastructure\Repositories\TagEloquentRepository'
         );
+
+        //Photo Repository
+        $this->app->bind(
+            'App\Domain\Models\Photo\PhotoRepository',
+            'App\Infrastructure\Repositories\PhotoEloquentRepository'
+        );
     }
 }
