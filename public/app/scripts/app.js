@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 var app =angular
-    .module('publicApp', ['ui.router','angularFileUpload','ngAnimate','restangular','angular-redactor','angular-loading-bar','ngSanitize','datatables','datatables.bootstrap','ngTagsInput']);
+    .module('publicApp', ['ui.router','angularFileUpload','ngAnimate','restangular','angular-redactor','angular-loading-bar','ngSanitize','datatables','datatables.bootstrap','ngTagsInput','ngDroplet']);
 
 app.run(['$http','$location','$window', function($http,$location,$window) {
 

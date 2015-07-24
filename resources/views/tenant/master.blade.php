@@ -12,7 +12,6 @@
     <!-- endbuild -->
     <link rel="stylesheet" href="{{ url('app/styles/bootstrap.min.css') }}">
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="{{ url('app/styles/main.css') }}">
     <!-- endbuild -->
     <link rel="stylesheet" href="{{ url('app/plugins/kendo/kendo.common-material.min.css') }}" />
     <link rel="stylesheet" href="{{ url('app/plugins/kendo/kendo.material.min.css') }}" />
@@ -22,6 +21,8 @@
     <link rel='stylesheet' href="{{url('bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css')}}" type='text/css' media='all' />
     <link rel='stylesheet' href="{{url('bower_components/ng-tags-input/ng-tags-input.min.css')}}" type='text/css' media='all' />
     <link rel='stylesheet' href="{{url('bower_components/ng-tags-input/ng-tags-input.bootstrap.min.css')}}" type='text/css' media='all' />
+    <link rel='stylesheet' href="{{url('bower_components/ng-droplet/example/css/Default.css')}}" type='text/css' media='all' />
+    <link rel="stylesheet" href="{{ url('app/styles/main.css') }}">
 
 </head>
 <body ng-app="publicApp">
@@ -63,6 +64,8 @@
 <script src="{{url('bower_components/angular-datatables/dist/angular-datatables.min.js')}}"></script>
 <script src="{{url('bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.min.js')}}"></script>
 <script src="{{url('bower_components/ng-tags-input/ng-tags-input.min.js')}}"></script>
+<script src="{{url('bower_components/ng-droplet/dist/ng-droplet.min.js')}}"></script>
+<script src="{{url('bower_components/progressbar.js/dist/progressbar.min.js')}}"></script>
 <!-- endbower -->
 <!-- endbuild -->
 

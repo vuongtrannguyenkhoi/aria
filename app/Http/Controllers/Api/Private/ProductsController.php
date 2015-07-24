@@ -158,19 +158,18 @@ class ProductsController extends ApiController
     public function postUpload()
     {
         //upload photo
-
-        $photo = Input::file('file');
-
-        if($photo){
-            $extension = $photo->getClientOriginalExtension();
-            $filename = sha1(time().time()).".{$extension}";
-            $dir = public_path().'/upload/member/'.$filename;
-            Image::make($photo)->resize(300, 200)->save($dir);
-            $photo = '/upload/member/'.$filename;
+        $files = Input::file('file');
+        $photos = [];
+        foreach ($files as $file) {
+                $extension = $file->getClientOriginalExtension();
+                $filename = sha1(time().time()).".{$extension}";
+                $dir = public_path().'/upload/member/'.$filename;
+                Image::make($file)->resize(300, 200)->save($dir);
+                $photos[] = '/upload/member/'.$filename;
         }
 
         return $this->respond([
-           'data' => $photo
+           'data' => $photos
         ]);
     }
 

@@ -4,47 +4,67 @@
             <fieldset>
                 <legend>Thêm mới sản phẩm</legend>
                 <div class="form-group">
-                    <label for="photo" class="col-lg-2 control-label"><span class="txt-color-red">Ảnh sản phẩm</span></label>
+                    <label class="col-lg-2 control-label"><span class="txt-color-red">Ảnh sản phẩm</span></label>
                     <div class="col-lg-10">
-                        <input type="file" nv-file-select uploader="uploader"/><br/>
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th width="50%">Name</th>
-                                <th ng-show="uploader.isHTML5">Size</th>
-                                <th ng-show="uploader.isHTML5">Progress</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr ng-repeat="item in uploader.queue">
-                                <td><strong>{{ item.file.name }}</strong></td>
-                                <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
-                                <td ng-show="uploader.isHTML5">
-                                    <div class="progress" style="margin-bottom: 0;">
-                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <span ng-repeat="photo in photos">
+                                    <img ng-src="{{photo}}">
+                                </span>
+                            </div>
+                        </div>
+                        <section class="container">
+
+                            <section class="droplet" ng-class="{ uploading: interface.isUploading() }">
+
+                                <section class="toolbar">
+
+                                    <input type="button" class="button upload-files" value="Upload Files"
+                                           ng-click="interface.uploadFiles()"
+                                           ng-hide="interface.isUploading()"
+                                           ng-class="{ clickable: interface.isReady() }" />
+
+                                    <input type="button" class="button upload-files" value="Uploading..." ng-show="interface.isUploading()" />
+
+                                    <div class="add-files">
+                                        <input type="button" class="button add-files" value="Add Files..." />
+                                        <droplet-upload-multiple ng-model="interface"></droplet-upload-multiple>
                                     </div>
-                                </td>
-                                <td class="text-center">
-                                    <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
-                                    <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
-                                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
-                                </td>
-                                <td nowrap>
-                                    <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
-                                        <span class="glyphicon glyphicon-upload"></span> Upload
-                                    </button>
-                                    <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
-                                        <span class="glyphicon glyphicon-ban-circle"></span> Cancel
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
-                                        <span class="glyphicon glyphicon-trash"></span> Remove
-                                    </button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+
+                                    <comment class="progress" ng-class="{ visible: interface.isUploading() }">
+                                        Uploaded: {{interface.progress.percent}}%
+                                    </comment>
+
+                                </section>
+
+                                <droplet ng-model="interface">
+
+                                    <div class="loading" ng-class="{ visible: interface.isUploading() }">
+                                        <svg viewBox="0 0 400 400">
+                                            <path class="loading-path" data-progressbar ng-model="interface.progress.percent"
+                                                  d="M 0,1 L 398,1 L 398,234 L 1,234 L 0,1"
+                                                  stroke="#D3B2D1" stroke-width="1" fill-opacity="0"
+                                                  style="stroke-dasharray: 392px, 392px;stroke-dashoffset: 392px;"></path>
+                                        </svg>
+                                    </div>
+
+                                    <comment></comment>
+
+                                    <ul class="files">
+
+                                        <li ng-repeat="model in interface.getFiles(interface.FILE_TYPES.VALID)">
+                                            <droplet-preview ng-model="model"></droplet-preview>
+                                            <div class="delete" ng-click="model.deleteFile()">&times;</div>
+                                            <div class="size">{{model.file.size / 1024 / 1024 | number: 1}}MB</div>
+                                        </li>
+
+                                    </ul>
+
+                                </droplet>
+
+                            </section>
+
+                        </section>
                     </div>
                 </div>
 
