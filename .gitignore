@@ -4,4 +4,4 @@
 /public/backend
 /public/test/
 .env
-.idea
+/.idea

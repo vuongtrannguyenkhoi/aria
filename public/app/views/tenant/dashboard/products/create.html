@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-lg-12">
-        <form name="create-product" ng-submit="submit()" class="form-horizontal">
+        <my-form name="create-product" class="form-horizontal">
             <fieldset>
                 <legend>Thêm mới sản phẩm</legend>
                 <div class="form-group">
@@ -8,9 +8,33 @@
                     <div class="col-lg-10">
                         <div class="row">
                             <div class="col-lg-12">
-                                <span ng-repeat="photo in photos">
-                                    <img ng-src="{{photo}}">
-                                </span>
+                                <a ng-click="toggleModal()" class="btn btn-sm btn-default">Xem ảnh</a>
+                                <modal-dialog show='dialogShown' height='100%' width='75%'>
+                                    <span ng-repeat="photo in photos" >
+                                            <img ng-src="{{photo.thumb}}" class="photo-thumb" ng-click="photoDetail(photo)">
+                                        </span>
+                                    <div class="view-photo-detail" ng-show="isShowedPhotoDetail">
+                                        <div class="view-photo-detail-img">
+                                            <img ng-src="{{photoDetailObject.path}}" alt="">
+                                        </div>
+                                        <div class="view-photo-detail-content">
+                                            <div class="view-photo-detail-content-header">
+                                                <div class="view-photo-detail-content-header-controls">
+                                                    <a class="btn btn-sm btn-default" ng-click="photoDetailClose()">X</a>
+                                                </div>
+                                            </div>
+                                            <div class="view-photo-detail-content-meta">
+                                                Tiêu đề: <a href="#" editable-text="photoDetailObject.title" onaftersave="updatePhoto(photoDetailObject)">{{ photoDetailObject.title || "click to edit" }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </modal-dialog>
+                                
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+
                             </div>
                         </div>
                         <section class="container">
@@ -40,12 +64,7 @@
                                 <droplet ng-model="interface">
 
                                     <div class="loading" ng-class="{ visible: interface.isUploading() }">
-                                        <svg viewBox="0 0 400 400">
-                                            <path class="loading-path" data-progressbar ng-model="interface.progress.percent"
-                                                  d="M 0,1 L 398,1 L 398,234 L 1,234 L 0,1"
-                                                  stroke="#D3B2D1" stroke-width="1" fill-opacity="0"
-                                                  style="stroke-dasharray: 392px, 392px;stroke-dashoffset: 392px;"></path>
-                                        </svg>
+                                        <progressbar class="progress-striped active" value="interface.progress.percent" type="success">{{type}} <i ng-show="showWarning">!!! Watch out !!!</i></progressbar>
                                     </div>
 
                                     <comment></comment>
@@ -107,11 +126,11 @@
                 <hr>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
-                        <button type="submit" class="btn btn-primary btn-sm">Thêm</button>
+                        <button ng-click="submit()" class="btn btn-primary btn-sm">Thêm</button>
                     </div>
                 </div>
             </fieldset>
-        </form>
+        </my-form>
     </div>
 </div>
 

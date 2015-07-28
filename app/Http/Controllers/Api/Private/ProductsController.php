@@ -115,8 +115,6 @@ class ProductsController extends ApiController
         if(!$product)
             return $this->respondNotFound('Product does not exist');
 
-        $this->productRepository->update($product);
-
         return $this->respond([
             'data' => $this->transform($product)
         ]);

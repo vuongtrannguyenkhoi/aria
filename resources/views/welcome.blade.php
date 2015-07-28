@@ -48,14 +48,18 @@
 <script src="{{url('bower_components/angular-animate/angular-animate.min.js')}}"></script>
 <script src="{{url('bower_components/angular-redactor/angular-redactor.js')}}"></script>
 <script src="{{url('bower_components/angular-loading-bar/build/loading-bar.min.js')}}"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+<script src="app/plugins/underscore-min.js"></script>
 <script src="{{url('bower_components/restangular/dist/restangular.min.js')}}"></script>
 <script src="{{url('bower_components/angular-sanitize/angular-sanitize.min.js')}}"></script>
 <script src="{{url('bower_components/datatables/media/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{url('bower_components/angular-datatables/dist/angular-datatables.min.js')}}"></script>
 <script src="{{url('bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.min.js')}}"></script>
+<script src="{{url('bower_components/ng-tags-input/ng-tags-input.min.js')}}"></script>
+<script src="{{url('bower_components/ng-droplet/dist/ng-droplet.min.js')}}"></script>
+<script src="{{url('bower_components/progressbar.js/dist/progressbar.min.js')}}"></script>
 <!-- endbower -->
 <!-- endbuild -->
+
 
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="{{url('app/scripts/app.js')}}"></script>

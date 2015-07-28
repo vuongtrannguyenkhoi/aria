@@ -1,17 +1,24 @@
 <?php
 
-namespace App\Domain\Models\Product;
+namespace App\Domain\Models\Photo;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Photo extends Model
 {
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name', 'slug', 'price', 'active', 'thumb', 'content', 'author_id'];
+    protected $fillable = [
+        'path',
+        'thumb',
+        'title',
+        'alt',
+        'author_id',
+        'gallery_id'
+    ];
 
     public function author()
     {
@@ -20,7 +27,7 @@ class Product extends Model
 
     public function gallery()
     {
-        return $this->hasOne('App\Domain\Models\Gallery');
+        return $this->belongsTo('App\Domain\Models\Gallery\Gallery');
     }
 
 }

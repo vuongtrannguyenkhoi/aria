@@ -8,7 +8,9 @@
  * Controller of the publicApp
  */
 angular.module('publicApp')
-    .controller('ProductsCreateCtrl', function ($scope, $state, $http, URL_API, FileUploader, Restangular, $timeout) {
+    .controller('ProductsCreateCtrl', function ($scope, $state, $http, URL_API, FileUploader, Restangular, $timeout, $modal, $log, authToken,editableOptions) {
+
+        editableOptions.theme = 'bs3';
 
         var baseProducts = Restangular.all('products');
 
@@ -71,9 +73,17 @@ angular.module('publicApp')
         $scope.$on('$dropletReady', function whenDropletReady() {
 
             $scope.interface.allowedExtensions(['png', 'jpg', 'bmp', 'gif', 'svg', 'torrent','rar']);
-            $scope.interface.setRequestUrl(URL_API + 'products/upload');
+            $scope.interface.setRequestUrl(URL_API + 'photos/uploads');
             $scope.interface.defineHTTPSuccess([/2.{2}/]);
             $scope.interface.useArray(true);
+
+            var token = authToken.getToken();
+            if(token)
+                var authorization = 'Bearer ' + token;
+
+            $scope.interface.setRequestHeaders({
+                Authorization: authorization
+            });
 
         });
 
@@ -82,9 +92,9 @@ angular.module('publicApp')
 
             $scope.uploadCount = files.length;
             $scope.success     = true;
-            console.log(response, files);
-            if(!$scope.photos)
+            if(!$scope.photos){
                 $scope.photos = response.data;
+            }
             else{
 
                 angular.forEach(response.data, function(value, key) {
@@ -110,11 +120,41 @@ angular.module('publicApp')
             }, 5000);
 
         });
+        $scope.dialogShown = false;
+        $scope.toggleModal = function() {
+
+
+
+            $scope.dialogShown = !$scope.dialogShown;
+        };
+
+        $scope.photoDetail = function(photo){
+            //get photo of photoId
+            Restangular.one('photos', photo.id).get().then(function(photo){
+
+                $scope.photoDetailObject = photo;
+
+                $scope.isShowedPhotoDetail = true;
+            });
+        };
+
+        $scope.photoDetailClose = function(){
+
+            $scope.isShowedPhotoDetail = false;
+        };
+
+        $scope.updatePhoto = function(photo){
+
+            photo.put().then(function(photo){
+
+                alert('Update photo!');
+            });
+        };
 
         $scope.submit = function(){
 
             var product = {
-                fileUrl: $scope.photos[0],
+                fileUrl: $scope.photos[0].thumb,
                 name: $scope.name,
                 price: $scope.price,
                 active: $scope.active,
@@ -129,60 +169,4 @@ angular.module('publicApp')
                 });
             });
         }
-    }).directive('progressbar', function ProgressbarDirective() {
-
-        return {
-
-            /**
-             * @property restrict
-             * @type {String}
-             */
-            restrict: 'A',
-
-            /**
-             * @property scope
-             * @type {Object}
-             */
-            scope: {
-                model: '=ngModel'
-            },
-
-            /**
-             * @property ngModel
-             * @type {String}
-             */
-            require: 'ngModel',
-
-            /**
-             * @method link
-             * @param scope {Object}
-             * @param element {Object}
-             * @return {void}
-             */
-            link: function link(scope, element) {
-
-                var progressBar = new ProgressBar.Path(element[0], {
-                    strokeWidth: 2
-                });
-
-                scope.$watch('model', function() {
-
-                    progressBar.animate(scope.model / 100, {
-                        duration: 1000
-                    });
-
-                });
-
-                scope.$on('$dropletSuccess', function onSuccess() {
-                    progressBar.animate(0);
-                });
-
-                scope.$on('$dropletError', function onSuccess() {
-                    progressBar.animate(0);
-                });
-
-            }
-
-        }
-
     });
