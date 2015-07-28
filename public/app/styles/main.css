@@ -278,3 +278,28 @@ section.container section.droplet section.toolbar{
     box-shadow: none;
     background: none;
 }
+
+.view-photo-detail{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    text-align: center;
+}
+
+.view-photo-detail-img{
+    width: 70%;
+    float: left;
+}
+
+.view-photo-detail-content{
+    width: 30%;
+    float: right;
+    text-align: left;
+}
+
+.view-photo-detail-content-header-controls{
+    text-align: right;
+}

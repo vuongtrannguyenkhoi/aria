@@ -18,8 +18,9 @@ class Product extends Model
         return $this->belongsTo('App\User','author_id');
     }
 
-    public function tags()
+    public function gallery()
     {
+        return $this->hasOne('App\Domain\Models\Gallery');
     }
 
 }

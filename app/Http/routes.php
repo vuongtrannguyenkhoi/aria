@@ -49,7 +49,10 @@ Route::group(['prefix' => 'api'], function()
         //tags
         Route::resource('tags', 'App\Api\Auth\TagsController');
 
+        Route::resource('photos', 'App\Api\Auth\PhotosController');
 
+        Route::post('photos/uploads', 'App\Api\Auth\PhotosController@uploads');
+        Route::post('photos/upload', 'App\Api\Auth\PhotosController@upload');
     });
 });
 

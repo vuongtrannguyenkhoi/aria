@@ -11,11 +11,23 @@ class Photo extends Model
      *
      * @var array
      */
-    protected $fillable = ['path', 'author_id', 'product_id'];
+    protected $fillable = [
+        'path',
+        'thumb',
+        'title',
+        'alt',
+        'author_id',
+        'gallery_id'
+    ];
 
     public function author()
     {
         return $this->belongsTo('App\User','author_id');
+    }
+
+    public function gallery()
+    {
+        return $this->belongsTo('App\Domain\Models\Gallery\Gallery');
     }
 
 }

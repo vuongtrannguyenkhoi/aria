@@ -22,6 +22,8 @@
     <link rel='stylesheet' href="{{url('bower_components/ng-tags-input/ng-tags-input.min.css')}}" type='text/css' media='all' />
     <link rel='stylesheet' href="{{url('bower_components/ng-tags-input/ng-tags-input.bootstrap.min.css')}}" type='text/css' media='all' />
     <link rel='stylesheet' href="{{url('bower_components/ng-droplet/example/css/Default.css')}}" type='text/css' media='all' />
+    <link rel='stylesheet' href="{{url('bower_components/ngModal/dist/ng-modal.css')}}" type='text/css' media='all' />
+    <link rel='stylesheet' href="{{url('bower_components/angular-xeditable/dist/css/xeditable.css')}}" type='text/css' media='all' />
     <link rel="stylesheet" href="{{ url('app/styles/main.css') }}">
 
 </head>
@@ -66,6 +68,10 @@
 <script src="{{url('bower_components/ng-tags-input/ng-tags-input.min.js')}}"></script>
 <script src="{{url('bower_components/ng-droplet/dist/ng-droplet.min.js')}}"></script>
 <script src="{{url('bower_components/progressbar.js/dist/progressbar.min.js')}}"></script>
+<script src="{{url('bower_components/angular-bootstrap/ui-bootstrap.min.js')}}"></script>
+<script src="{{url('bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js')}}"></script>
+<script src="{{url('bower_components/ngModal/dist/ng-modal.min.js')}}"></script>
+<script src="{{url('bower_components/angular-xeditable/dist/js/xeditable.js')}}"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
