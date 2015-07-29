@@ -13,8 +13,19 @@
     <!-- endbuild -->
     <link rel="stylesheet" href="{{ url('app/styles/bootstrap.min.css') }}">
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="{{ url('app/styles/main.css') }}">
     <!-- endbuild -->
+    <link rel="stylesheet" href="{{ url('app/plugins/kendo/kendo.common-material.min.css') }}" />
+    <link rel="stylesheet" href="{{ url('app/plugins/kendo/kendo.material.min.css') }}" />
+    <link rel="stylesheet" href="{{ url('app/plugins/redactor/redactor.css') }}" />
+    <link rel='stylesheet' href="{{url('bower_components/angular-loading-bar/build/loading-bar.min.css')}}" type='text/css' media='all' />
+    <link rel='stylesheet' href="{{url('bower_components/datatables/media/css/jquery.dataTables.min.css')}}" type='text/css' media='all' />
+    <link rel='stylesheet' href="{{url('bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css')}}" type='text/css' media='all' />
+    <link rel='stylesheet' href="{{url('bower_components/ng-tags-input/ng-tags-input.min.css')}}" type='text/css' media='all' />
+    <link rel='stylesheet' href="{{url('bower_components/ng-tags-input/ng-tags-input.bootstrap.min.css')}}" type='text/css' media='all' />
+    <link rel='stylesheet' href="{{url('bower_components/ng-droplet/example/css/Default.css')}}" type='text/css' media='all' />
+    <link rel='stylesheet' href="{{url('bower_components/ngModal/dist/ng-modal.css')}}" type='text/css' media='all' />
+    <link rel='stylesheet' href="{{url('bower_components/angular-xeditable/dist/css/xeditable.css')}}" type='text/css' media='all' />
+    <link rel="stylesheet" href="{{ url('app/styles/main.css') }}">
 </head>
 <body ng-app="publicApp">
 <!--[if lte IE 8]>
@@ -57,6 +68,12 @@
 <script src="{{url('bower_components/ng-tags-input/ng-tags-input.min.js')}}"></script>
 <script src="{{url('bower_components/ng-droplet/dist/ng-droplet.min.js')}}"></script>
 <script src="{{url('bower_components/progressbar.js/dist/progressbar.min.js')}}"></script>
+<script src="{{url('bower_components/angular-bootstrap/ui-bootstrap.min.js')}}"></script>
+<script src="{{url('bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js')}}"></script>
+<script src="{{url('bower_components/ngModal/dist/ng-modal.min.js')}}"></script>
+<script src="{{url('bower_components/angular-xeditable/dist/js/xeditable.js')}}"></script>
+<script src="{{url('bower_components/ng-file-upload/ng-file-upload.min.js')}}"></script>
+<script src="{{url('bower_components/ng-file-upload/ng-file-upload-shim.min.js')}}"></script>
 <!-- endbower -->
 <!-- endbuild -->
 

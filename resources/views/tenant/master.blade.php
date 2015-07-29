@@ -24,6 +24,7 @@
     <link rel='stylesheet' href="{{url('bower_components/ng-droplet/example/css/Default.css')}}" type='text/css' media='all' />
     <link rel='stylesheet' href="{{url('bower_components/ngModal/dist/ng-modal.css')}}" type='text/css' media='all' />
     <link rel='stylesheet' href="{{url('bower_components/angular-xeditable/dist/css/xeditable.css')}}" type='text/css' media='all' />
+    <link rel="stylesheet" href="{{ url('app/plugins/css3lightbox/css/style3.css') }}">
     <link rel="stylesheet" href="{{ url('app/styles/main.css') }}">
 
 </head>
@@ -72,6 +73,8 @@
 <script src="{{url('bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js')}}"></script>
 <script src="{{url('bower_components/ngModal/dist/ng-modal.min.js')}}"></script>
 <script src="{{url('bower_components/angular-xeditable/dist/js/xeditable.js')}}"></script>
+<script src="{{url('bower_components/ng-file-upload/ng-file-upload.min.js')}}"></script>
+<script src="{{url('bower_components/ng-file-upload/ng-file-upload-shim.min.js')}}"></script>
 <!-- endbower -->
 <!-- endbuild -->
 

@@ -287,19 +287,63 @@ section.container section.droplet section.toolbar{
     height: 100%;
     background-color: #fff;
     text-align: center;
+
 }
 
 .view-photo-detail-img{
     width: 70%;
+    height: 100%;
     float: left;
+    position: relative;
+    display: table;
+}
+
+.view-photo-detail-img .box-image{
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
 }
 
 .view-photo-detail-content{
     width: 30%;
+    height: 100%;
     float: right;
     text-align: left;
+    background-color: #FFF;
 }
 
 .view-photo-detail-content-header-controls{
     text-align: right;
+}
+.box-image-controls{
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+}
+.box-image-controls-prev{
+    float: left;
+}
+.box-image-controls-next{
+    float: right;
+}
+.view-photo-detail-content-meta{
+    padding: 0 10px;
+}
+.drop-box {
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    width: 200px;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.photo-thumb {
+    cursor: pointer;
+}
+.dragover {
+    border: 5px dashed blue;
 }

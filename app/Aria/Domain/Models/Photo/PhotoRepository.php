@@ -15,7 +15,7 @@ interface PhotoRepository
      * Add a new Photo
      *
      * @param Photo $photo
-     * @return void
+     * @return Photo $photo|bool
      */
     public function add(Photo $photo);
 

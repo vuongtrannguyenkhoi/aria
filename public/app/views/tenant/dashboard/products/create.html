@@ -8,82 +8,44 @@
                     <div class="col-lg-10">
                         <div class="row">
                             <div class="col-lg-12">
-                                <a ng-click="toggleModal()" class="btn btn-sm btn-default">Xem ảnh</a>
-                                <modal-dialog show='dialogShown' height='100%' width='75%'>
-                                    <span ng-repeat="photo in photos" >
-                                            <img ng-src="{{photo.thumb}}" class="photo-thumb" ng-click="photoDetail(photo)">
-                                        </span>
-                                    <div class="view-photo-detail" ng-show="isShowedPhotoDetail">
-                                        <div class="view-photo-detail-img">
-                                            <img ng-src="{{photoDetailObject.path}}" alt="">
-                                        </div>
-                                        <div class="view-photo-detail-content">
-                                            <div class="view-photo-detail-content-header">
-                                                <div class="view-photo-detail-content-header-controls">
-                                                    <a class="btn btn-sm btn-default" ng-click="photoDetailClose()">X</a>
+                                <div class="ng-modal"  ng-show="isShowedPhotoDetail">
+                                    <div class="ng-modal-dialog" style="width: 70%;height: 70%">
+                                        <div class="view-photo-detail lb-overlay" ng-class="{lbOverlayTarget: isShowedPhotoDetail}">
+                                            <div class="view-photo-detail-img">
+                                                <div class="box-image">
+                                                    <img ng-src="{{photoDetailObject.path}}" alt="">
+                                                </div>
+                                                <div class="box-image-controls">
+                                                    <a class="box-image-controls-prev btn btn-sm btn-default" ng-click="prevImage()">Previous</a>
+                                                    <a class="box-image-controls-next btn btn-sm btn-default" ng-click="nextImage()">Next</a>
                                                 </div>
                                             </div>
-                                            <div class="view-photo-detail-content-meta">
-                                                Tiêu đề: <a href="#" editable-text="photoDetailObject.title" onaftersave="updatePhoto(photoDetailObject)">{{ photoDetailObject.title || "click to edit" }}</a>
+                                            <div class="view-photo-detail-content">
+                                                <div class="view-photo-detail-content-header">
+                                                    <div class="view-photo-detail-content-header-controls">
+                                                        <a class="btn btn-sm btn-default" ng-click="photoDetailClose()">X</a>
+                                                    </div>
+                                                </div>
+                                                <div class="view-photo-detail-content-meta">
+                                                    Tiêu đề: <a href="#" editable-text="photoDetailObject.title" onaftersave="updatePhoto(photoDetailObject)" buttons="no">{{ photoDetailObject.title || "click to edit" }}</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </modal-dialog>
-                                
+                                </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
-
+                                <div ngf-drop ngf-select ng-model="files" class="drop-box"
+                                     ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true"
+                                     accept="image/*,application/pdf">Thêm ảnh</div>
+                                <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+                                <span ng-repeat="photo in photos" >
+                                            <img ng-src="{{photo.thumb}}" class="photo-thumb" ng-click="photoDetail(photo)">
+                                        </span>
                             </div>
                         </div>
-                        <section class="container">
-
-                            <section class="droplet" ng-class="{ uploading: interface.isUploading() }">
-
-                                <section class="toolbar">
-
-                                    <input type="button" class="button upload-files" value="Upload Files"
-                                           ng-click="interface.uploadFiles()"
-                                           ng-hide="interface.isUploading()"
-                                           ng-class="{ clickable: interface.isReady() }" />
-
-                                    <input type="button" class="button upload-files" value="Uploading..." ng-show="interface.isUploading()" />
-
-                                    <div class="add-files">
-                                        <input type="button" class="button add-files" value="Add Files..." />
-                                        <droplet-upload-multiple ng-model="interface"></droplet-upload-multiple>
-                                    </div>
-
-                                    <comment class="progress" ng-class="{ visible: interface.isUploading() }">
-                                        Uploaded: {{interface.progress.percent}}%
-                                    </comment>
-
-                                </section>
-
-                                <droplet ng-model="interface">
-
-                                    <div class="loading" ng-class="{ visible: interface.isUploading() }">
-                                        <progressbar class="progress-striped active" value="interface.progress.percent" type="success">{{type}} <i ng-show="showWarning">!!! Watch out !!!</i></progressbar>
-                                    </div>
-
-                                    <comment></comment>
-
-                                    <ul class="files">
-
-                                        <li ng-repeat="model in interface.getFiles(interface.FILE_TYPES.VALID)">
-                                            <droplet-preview ng-model="model"></droplet-preview>
-                                            <div class="delete" ng-click="model.deleteFile()">&times;</div>
-                                            <div class="size">{{model.file.size / 1024 / 1024 | number: 1}}MB</div>
-                                        </li>
-
-                                    </ul>
-
-                                </droplet>
-
-                            </section>
-
-                        </section>
                     </div>
                 </div>
 

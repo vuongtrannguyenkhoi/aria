@@ -32,16 +32,19 @@ class PhotoEloquentRepository extends TenantRepository implements PhotoRepositor
         $this->model = $model;
         $this->scope = $scope;
     }
-    
+
     /**
      * Add a new Photo
      *
      * @param Photo $photo
-     * @return void
+     * @return Photo|bool
      */
     public function add(Photo $photo)
     {
-       $photo->save();
+       $b = $photo->save();
+        if($b)
+            return $photo;
+        return $b;
     }
 
     /**

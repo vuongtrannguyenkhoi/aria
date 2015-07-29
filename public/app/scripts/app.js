@@ -22,7 +22,8 @@ var app =angular
         'ngTagsInput','ngDroplet',
         'ui.bootstrap',
         'ngModal',
-        'xeditable'
+        'xeditable',
+        'ngFileUpload'
     ]);
 
 app.run(['$http','$location','$window', function($http,$location,$window) {

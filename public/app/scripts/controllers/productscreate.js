@@ -8,21 +8,29 @@
  * Controller of the publicApp
  */
 angular.module('publicApp')
-    .controller('ProductsCreateCtrl', function ($scope, $state, $http, URL_API, FileUploader, Restangular, $timeout, $modal, $log, authToken,editableOptions) {
+    .controller('ProductsCreateCtrl', function (
+        $scope,
+        $state,
+        $http,
+        URL_API,
+        FileUploader,
+        Restangular,
+        $timeout,
+        $modal,
+        $log,
+        authToken,
+        editableOptions,
+        editableThemes,
+        Upload
+    ) {
 
         editableOptions.theme = 'bs3';
+        editableThemes.bs3.inputClass = 'input-sm';
+        editableThemes.bs3.buttonsClass = 'btn-sm';
 
         var baseProducts = Restangular.all('products');
 
-        var uploader = $scope.uploader = new FileUploader({
-            url: URL_API + 'products/upload'
-        });
 
-
-        uploader.onCompleteItem = function(fileItem, response, status, headers) {
-
-            $scope.fileUrl = response.data;
-        };
 
         //load tags
         var baseTags = Restangular.all('tags');
@@ -45,81 +53,36 @@ angular.module('publicApp')
             });
         };
 
-        /**
-         * @property interface
-         * @type {Object}
-         */
-        $scope.interface = {};
-
-        /**
-         * @property uploadCount
-         * @type {Number}
-         */
-        $scope.uploadCount = 0;
-
-        /**
-         * @property success
-         * @type {Boolean}
-         */
-        $scope.success = false;
-
-        /**
-         * @property error
-         * @type {Boolean}
-         */
-        $scope.error = false;
-
-        // Listen for when the interface has been configured.
-        $scope.$on('$dropletReady', function whenDropletReady() {
-
-            $scope.interface.allowedExtensions(['png', 'jpg', 'bmp', 'gif', 'svg', 'torrent','rar']);
-            $scope.interface.setRequestUrl(URL_API + 'photos/uploads');
-            $scope.interface.defineHTTPSuccess([/2.{2}/]);
-            $scope.interface.useArray(true);
-
-            var token = authToken.getToken();
-            if(token)
-                var authorization = 'Bearer ' + token;
-
-            $scope.interface.setRequestHeaders({
-                Authorization: authorization
-            });
-
+        //start upload files
+        $scope.$watch('files', function () {
+            $scope.upload($scope.files);
         });
 
-        // Listen for when the files have been successfully uploaded.
-        $scope.$on('$dropletSuccess', function onDropletSuccess(event, response, files) {
+        $scope.photos = [];
 
-            $scope.uploadCount = files.length;
-            $scope.success     = true;
-            if(!$scope.photos){
-                $scope.photos = response.data;
+        $scope.upload = function (files) {
+            if (files && files.length) {
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    $timeout(function(){
+                        Upload.upload({
+                            url: URL_API + 'photos/upload',
+                            file: file
+                        }).progress(function (evt) {
+                            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+
+                        }).success(function (response, status, headers, config) {
+
+                                $scope.photos.push(response.data);
+
+                            console.log(response);
+                        });
+                    },500);
+                }
             }
-            else{
+        };
+        //end upload files
 
-                angular.forEach(response.data, function(value, key) {
-                    $scope.photos.push(value);
-                });
-
-
-            }
-
-            $timeout(function timeout() {
-                $scope.success = false;
-            }, 5000);
-
-        });
-
-        // Listen for when the files have failed to upload.
-        $scope.$on('$dropletError', function onDropletError(event, response) {
-
-            $scope.error = true;
-            console.log(response);
-            $timeout(function timeout() {
-                $scope.error = false;
-            }, 5000);
-
-        });
         $scope.dialogShown = false;
         $scope.toggleModal = function() {
 
@@ -128,12 +91,21 @@ angular.module('publicApp')
             $scope.dialogShown = !$scope.dialogShown;
         };
 
+        //photo view aria
+
+        function calculateAspectRatioFit(srcWidth, srcHeight, maxWidth, maxHeight) {
+
+            var ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
+
+            return { width: srcWidth*ratio, height: srcHeight*ratio };
+        }
+
         $scope.photoDetail = function(photo){
             //get photo of photoId
+            $scope.currPhotoIndex = $scope.photos.indexOf(photo);
             Restangular.one('photos', photo.id).get().then(function(photo){
 
                 $scope.photoDetailObject = photo;
-
                 $scope.isShowedPhotoDetail = true;
             });
         };
@@ -141,6 +113,23 @@ angular.module('publicApp')
         $scope.photoDetailClose = function(){
 
             $scope.isShowedPhotoDetail = false;
+        };
+
+        $scope.prevImage = function(){
+
+            if($scope.currPhotoIndex - 1 > -1){
+
+                $scope.photoDetail($scope.photos[$scope.currPhotoIndex-1]);
+            }
+
+        };
+
+        $scope.nextImage = function(){
+
+            if($scope.currPhotoIndex + 1 < $scope.photos.length){
+
+                $scope.photoDetail($scope.photos[$scope.currPhotoIndex+1]);
+            }
         };
 
         $scope.updatePhoto = function(photo){

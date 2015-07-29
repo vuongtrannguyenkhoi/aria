@@ -128,14 +128,12 @@ class PhotosController extends ApiController
             'thumb' => $photo['thumb']
         ]);
 
-        $this->photoRepository->add($newPhoto);
+        $photo = $this->photoRepository->add($newPhoto);
 
         $this->galleryRepository->update($gallery);
 
-        $photos = $gallery->photos()->get()->toArray();
-
         return $this->respond([
-            'data' => $this->transformCollection($photos)
+            'data' => $this->transform($photo)
         ]);
     }
 
